@@ -29,6 +29,11 @@ model.add_edge(s1, s3)
 model.add_edge(s2, s3)
 model.bake()
 
-beliefs = model.predict_proba({ 'age_below_25' : 'True'})
+beliefs = model.predict_proba({ 'accident' : 'True'})
+beliefs = map(str, beliefs)
+print("\n".join( "{} {}".format(state.name, belief) for state, belief in zip(model.states,beliefs)))
+
+
+beliefs = model.predict_proba({ 'accident' : 'False', 'expensive_car': 'True'})
 beliefs = map(str, beliefs)
 print("\n".join( "{} {}".format(state.name, belief) for state, belief in zip(model.states,beliefs)))
