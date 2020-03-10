@@ -1,4 +1,5 @@
 from pomegranate import *
+import numpy
 
 age_below_25 = DiscreteDistribution({'True': 0.65, 'False': 0.35})
 expensive_car = DiscreteDistribution({'True': 0.55, 'False': 0.45})
@@ -15,7 +16,7 @@ accident = ConditionalProbabilityTable(
         ['False','False','False', 0.6]
 
 ],
-[age_below_25, expensive_car]
+[age_below_25, expensive_car],
 )
        
 
@@ -29,11 +30,23 @@ model.add_edge(s1, s3)
 model.add_edge(s2, s3)
 model.bake()
 
+
 beliefs = model.predict_proba({ 'accident' : 'True'})
 beliefs = map(str, beliefs)
 print("\n".join( "{} {}".format(state.name, belief) for state, belief in zip(model.states,beliefs)))
 
-
+print("################################")
 beliefs = model.predict_proba({ 'accident' : 'False', 'expensive_car': 'True'})
 beliefs = map(str, beliefs)
 print("\n".join( "{} {}".format(state.name, belief) for state, belief in zip(model.states,beliefs)))
+
+
+print("################################")
+beliefs = model.predict_proba({ 'age_below_25' : 'True', 'expensive_car': 'True'})
+beliefs = map(str, beliefs)
+print("\n".join( "{} {}".format(state.name, belief) for state, belief in zip(model.states,beliefs)))
+
+
+
+print("################################")
+print(model.probability(  numpy.array(['True','True','True'], ndmin=2)  ))
