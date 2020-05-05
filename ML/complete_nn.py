@@ -13,7 +13,10 @@ def ReLu(x):
     return max(0, x)
 
 def deriv_ReLu(x):
-    return 1
+    if x == 0:
+        return 0
+    else
+        return 1
 
 
 def mse_loss(y_true, y_pred):
