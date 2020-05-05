@@ -15,7 +15,7 @@ def ReLu(x):
 def deriv_ReLu(x):
     if x == 0:
         return 0
-    else
+    else:
         return 1
 
 
